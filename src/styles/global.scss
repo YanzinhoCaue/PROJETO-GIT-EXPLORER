@@ -1,10 +1,97 @@
+@import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@500;700&family=Space+Grotesk:wght@400;500;700&display=swap');
+
+:root {
+  --bg-0: #02080f;
+  --bg-1: #041321;
+  --bg-2: #0a2236;
+  --ink-0: #e8f6ff;
+  --ink-1: #94b7d1;
+  --line: rgba(79, 182, 255, 0.35);
+  --cyan: #4fd3ff;
+  --amber: #ffc857;
+}
+
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
 }
 
+html,
+body,
+#root {
+  min-height: 100%;
+}
+
 body {
-  font: 16px "Helbetica Neue", Arial, sans-serif;
-  color: #121214;
+  font-family: 'Space Grotesk', sans-serif;
+  color: var(--ink-0);
+  background:
+    radial-gradient(circle at 15% 20%, rgba(79, 211, 255, 0.2), transparent 30%),
+    radial-gradient(circle at 85% 15%, rgba(255, 200, 87, 0.16), transparent 28%),
+    linear-gradient(160deg, var(--bg-0), var(--bg-1) 45%, var(--bg-2));
+  overflow-x: hidden;
+}
+
+body::before,
+body::after {
+  content: '';
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+}
+
+body::before {
+  background:
+    linear-gradient(90deg, rgba(255, 255, 255, 0.03) 1px, transparent 1px),
+    linear-gradient(180deg, rgba(255, 255, 255, 0.03) 1px, transparent 1px);
+  background-size: 56px 56px;
+  -webkit-mask-image: radial-gradient(circle at center, black 35%, transparent 88%);
+  mask-image: radial-gradient(circle at center, black 35%, transparent 88%);
+}
+
+body::after {
+  background: radial-gradient(circle at center, transparent, rgba(0, 0, 0, 0.72));
+}
+
+.app-shell {
+  position: relative;
+  min-height: 100vh;
+  padding: 64px 20px;
+}
+
+.app-shell::before,
+.app-shell::after {
+  content: '';
+  position: absolute;
+  width: 420px;
+  height: 420px;
+  border-radius: 50%;
+  filter: blur(55px);
+  opacity: 0.28;
+  pointer-events: none;
+  animation: drift 16s ease-in-out infinite;
+}
+
+.app-shell::before {
+  top: -110px;
+  left: -100px;
+  background: var(--cyan);
+}
+
+.app-shell::after {
+  right: -120px;
+  bottom: -130px;
+  background: var(--amber);
+  animation-delay: -8s;
+}
+
+@keyframes drift {
+  0%,
+  100% {
+    transform: translate3d(0, 0, 0) scale(1);
+  }
+  50% {
+    transform: translate3d(0, 28px, 0) scale(1.08);
+  }
 }
